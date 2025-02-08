@@ -1,5 +1,6 @@
 import axios, { AxiosError } from "axios";
 import {
+  BotConfig,
   ConversationMessage,
   KindroidResponse,
   KindroidAIResult,
@@ -14,27 +15,27 @@ import {
  * @throws Error if the API call fails (except for rate limits)
  */
 export async function callKindroidAI(
-  sharedAiCode: string,
+  botConfig: BotConfig,
   conversation: ConversationMessage[],
-  enableFilter: boolean = false
 ): Promise<KindroidAIResult> {
   try {
     if (conversation.length === 0) {
       throw new Error("Conversation array cannot be empty");
     }
 
+    const kindroidApiKey = botConfig.kindroidApiKey ?? process.env.KINDROID_API_KEY;
     const lastUsername = conversation[conversation.length - 1].username;
 
     const response = await axios.post<KindroidResponse>(
       process.env.KINDROID_INFER_URL!,
       {
-        share_code: sharedAiCode,
+        share_code: botConfig.sharedAiCode,
         conversation,
-        enable_filter: enableFilter,
+        enable_filter: botConfig.enableFilter,
       },
       {
         headers: {
-          Authorization: `Bearer ${process.env.KINDROID_API_KEY!}`,
+          Authorization: `Bearer ${kindroidApiKey}`,
           "X-Kindroid-Requester": lastUsername,
           "Content-Type": "application/json",
         },

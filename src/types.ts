@@ -2,7 +2,8 @@ export interface BotConfig {
   id: string;
   discordBotToken: string;
   sharedAiCode: string;
-  enableFilter: boolean;
+  enableFilter: boolean
+  kindroidApiKey?: string;
 }
 
 export interface ConversationMessage {

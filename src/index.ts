@@ -27,12 +27,15 @@ function loadBotConfigs(): BotConfig[] {
     // Get optional settings
     const enableFilter =
       process.env[`ENABLE_FILTER_${currentIndex}`]?.toLowerCase() === "true";
+      const kindroidApiKey =
+      process.env[`KINDROID_API_KEY_${currentIndex}`];
 
     configs.push({
       id: `bot${currentIndex}`,
       discordBotToken: botToken,
       sharedAiCode,
       enableFilter,
+      kindroidApiKey,
     });
 
     currentIndex++;

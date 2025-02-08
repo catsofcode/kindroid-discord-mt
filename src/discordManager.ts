@@ -193,9 +193,8 @@ async function createDiscordClientForBot(
 
       // Call Kindroid AI with the conversation context
       const aiResult = await callKindroidAI(
-        botConfig.sharedAiCode,
+        botConfig,
         conversationArray,
-        botConfig.enableFilter
       );
 
       // If rate limited, silently ignore
@@ -282,9 +281,8 @@ async function handleDirectMessage(
 
       // Call Kindroid AI
       const aiResult = await callKindroidAI(
-        botConfig.sharedAiCode,
+        botConfig,
         conversationArray,
-        botConfig.enableFilter
       );
 
       // If rate limited, silently ignore
