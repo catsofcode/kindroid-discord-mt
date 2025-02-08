@@ -26,8 +26,8 @@ export async function callKindroidAI(
     const kindroidApiKey = botConfig.kindroidApiKey ?? process.env.KINDROID_API_KEY;
     const lastUsername = conversation[conversation.length - 1].username;
 
-    // Hash username into consistent alphanumeric string for rate limiting
-    const hashedUsername = Buffer.from(lastUsername)
+    // Encode username to handle non-ASCII characters, then hash to alphanumeric
+    const hashedUsername = Buffer.from(encodeURIComponent(lastUsername))
       .toString("base64")
       .replace(/[^a-zA-Z0-9]/g, "")
       .slice(0, 32); // Limit length to 32 chars
