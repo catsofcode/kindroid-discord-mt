@@ -4,7 +4,7 @@
   "description": "Multi-bot Discord manager for Kindroid AI personas with JIT message fetching",
   "main": "dist/index.js",
   "scripts": {
-    "start": "npm run build && node dist/index.js",
+    "start": "tsc && node dist/index.js",
     "dev": "ts-node-dev --respawn src/index.ts",
     "build": "tsc",
     "watch": "tsc -w",
