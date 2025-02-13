@@ -187,8 +187,8 @@ async function createDiscordClientForBot(
       // Fetch recent conversation with caching
       const conversationArray = await ephemeralFetchConversation(
         message.channel as TextChannel | DMChannel,
-        30, // last 30 messages
-        5000 // 5 second cache
+        botConfig.contextMessageCount,
+        botConfig.cacheDurationMs
       );
 
       // Call Kindroid AI with the conversation context
@@ -275,8 +275,8 @@ async function handleDirectMessage(
       // Fetch recent conversation
       const conversationArray = await ephemeralFetchConversation(
         message.channel,
-        30,
-        5000
+        botConfig.contextMessageCount,
+        botConfig.cacheDurationMs
       );
 
       // Call Kindroid AI

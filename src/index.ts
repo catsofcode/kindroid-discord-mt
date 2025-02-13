@@ -4,6 +4,10 @@ import { BotConfig } from "./types";
 
 dotenv.config();
 
+function envNumeric(name: string): number | undefined {  const result = Number(process.env[name]);
+  return Number.isNaN(result) ? undefined : result;
+}
+
 /**
  * Load bot configurations from environment variables
  * Looks for pairs of SHARED_AI_CODE_N and BOT_TOKEN_N where N starts from 1
@@ -29,6 +33,8 @@ function loadBotConfigs(): BotConfig[] {
       process.env[`ENABLE_FILTER_${currentIndex}`]?.toLowerCase() === "true";
       const kindroidApiKey =
       process.env[`KINDROID_API_KEY_${currentIndex}`];
+      const contextMessageCount = envNumeric(`CONTEXT_MESSAGE_COUNT_${currentIndex}`);
+      const cacheDurationMs = envNumeric(`CACHE_DURATION_MS_${currentIndex}`);
 
     configs.push({
       id: `bot${currentIndex}`,
@@ -36,6 +42,8 @@ function loadBotConfigs(): BotConfig[] {
       sharedAiCode,
       enableFilter,
       kindroidApiKey,
+      contextMessageCount,
+      cacheDurationMs,
     });
 
     currentIndex++;

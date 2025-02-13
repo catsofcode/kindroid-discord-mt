@@ -4,6 +4,8 @@ export interface BotConfig {
   sharedAiCode: string;
   enableFilter: boolean
   kindroidApiKey?: string;
+  contextMessageCount?: number;
+  cacheDurationMs?: number;
 }
 
 export interface ConversationMessage {
